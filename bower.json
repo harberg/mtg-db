@@ -1,0 +1,25 @@
+{
+  "name": "wonder",
+  "version": "0.0.0",
+  "authors": [
+    "Nick Harberg <nick@seamonsterstudios.com>"
+  ],
+  "description": "Bower files for Ancient Wonders card database",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.25",
+    "angular-route": "~1.2.25",
+    "angular-loader": "~1.2.25",
+    "angular-base64": "~2.0.2",
+    "angular-resource": "~1.2.25",
+    "angular-cookie": "~4.0.2"
+  }
+}
