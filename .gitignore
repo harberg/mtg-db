@@ -4,6 +4,7 @@
 node_modules
 app/bower_components
 dist/
+api/db.js
 
 # Users Environment Variables
 .lock-wscript
