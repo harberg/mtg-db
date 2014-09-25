@@ -1,5 +1,3 @@
-
-
 module.exports = function(grunt) {
 
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
@@ -11,20 +9,32 @@ module.exports = function(grunt) {
             },
             all : ['Gruntfile.js', 'server.js', 'app/js/**/*.js']
         },
-        clean : ['dist'],
+        clean : ['app/dist'],
         copy: {
-            all : {
-                expand  : true,
-                cwd     : 'app/',
-                src     : ['*.css', '*.html', '/images/**/*', '!Gruntfile.js'],
-                dest    : 'app/dist/',
-                flatten : false,
-                filter  : 'isFile'
-            },
+            main : {
+                files : [
+                    {
+                        expand  : true,
+                        cwd     : 'app/',
+                        src     : ['*.css', '*.html', '/images/**/*', '!Gruntfile.js'],
+                        dest    : 'app/dist/',
+                        flatten : false,
+                        filter  : 'isFile'
+                    },
+                    {
+                        expand  : true,
+                        cwd     : "app/js/app/",
+                        src     : ["views/*.html"],
+                        dest    : "app/dist",
+                        flatten : false,
+                        filter  : "isFile"
+                    }
+                ]
+            }
         },
         browserify : {
             all : {
-                src  : 'app/js/**/*/js',
+                src  : ['app/js/**/*.js', 'app/bower_components/angular/angular.js', 'app/bower_components/angular-base64/angular-base64.js', 'app/bower_components/angular-cookie/angular-cookie.js', 'app/bower_components/angular-loader/angular-loader.js', 'app/bower_components/angular-resource/angular-resource.js', 'app/bower_components/angular-route/angular-route.js'],
                 dest : 'app/dist/client.js'
             },
             options : {
@@ -81,7 +91,7 @@ module.exports = function(grunt) {
     grunt.registerTask('server', 'serve');
     grunt.registerTask('default', 'serve');
     grunt.registerTask('hint', 'jshint');
-    grunt.registerTask('build', ['clean', 'browserify', 'copy', 'sass']);
+    grunt.registerTask('build', ['clean', 'browserify', 'copy:main', 'sass']);
 
 
 

@@ -27,4 +27,23 @@ module.exports = function(app) {
             res.send(data);
         });
     });
+
+    app.post("/api/cards", function(req, res) {
+        Card.create({
+            cardName : req.body.cardName,
+            cardPrice : req.body.cardPrice,
+            cardSet : req.body.cardSet,
+            cardColor : req.body.cardColor
+        }, function(err, card) {
+            if(err) {
+                res.send(err);
+            }
+            Card.find(function(err, cards) {
+                if(err) {
+                    res.send(err);
+                }
+                res.json(cards);
+            });
+        });
+    });// end app.post("api/cards")
 };// end module.exports
