@@ -18,11 +18,11 @@ module.exports = function(app) {
     });
 
     app.get("/api/cards", function(req, res) {
-        res.setHeader("Content-Type", "application-json");
+        res.setHeader("Content-Type", "application/json");
         Card.find({}, function(err, data) {
             if(err) {
                 res.send(err);
-                return false;
+                //return false;
             }
             res.send(data);
         });

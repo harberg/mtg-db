@@ -9,21 +9,22 @@ var morgan = require('morgan');
 var app = express();
 
 var db = require('./api/db.js');
+
 mongoose.connect(db.url, function(err) {
     if(err) {
         console.log('you have not bowed to the Mongod');
     }
 });
 
-app.set('port', process.env.PORT || 8000);
+app.set('port', 3000 || process.env.PORT );
 app.set('apiBase', '/api/');
 
-app.use(bodyParser.json());
+app.use(bodyParser());
 app.use(morgan());
 app.use(express.static(__dirname + '/app/dist/'));
 
 // routes =================================================
-require("./api/routes/cardRoutes")(app);
+require("./api/routes/cardRoutes.js")(app);
 
 var server = http.createServer(app);
 server.listen(app.get('port'), function() {
