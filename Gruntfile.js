@@ -17,7 +17,7 @@ module.exports = function(grunt) {
                 expand  : true,
                 cwd     : 'app/',
                 src     : ['*.css', '*.html', '/images/**/*', '!Gruntfile.js'],
-                dest    : 'dist/',
+                dest    : 'app/dist/',
                 flatten : false,
                 filter  : 'isFile'
             },
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
         browserify : {
             all : {
                 src  : 'app/js/**/*/js',
-                dest : 'dist/client.js'
+                dest : 'app/dist/client.js'
             },
             options : {
                 transform : ['debowerify'],
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
         },
         watch : {
             scripts : {
-                files : ['app/js/**/*.js', 'app/bower_components/**/*.js', 'test/**/*.js', 'app/**/*.html'],
+                files : ['app/js/**/*.js', 'app/bower_components/**/*.js', 'test/**/*.js', 'app/**/*.html', 'api/**/*.js', '!app/dist/**/*.html'],
                 tasks : ['build']
             },
             express : {
@@ -79,6 +79,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('serve', [ 'build', 'express:dev', 'watch' ]);
     grunt.registerTask('server', 'serve');
+    grunt.registerTask('default', 'serve');
     grunt.registerTask('hint', 'jshint');
     grunt.registerTask('build', ['clean', 'browserify', 'copy', 'sass']);
 

@@ -4,21 +4,26 @@ var express = require('express');
 var http = require('http');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-
-var cardRoutes = require('./api/routes/cardRoutes');
+var morgan = require('morgan');
 
 var app = express();
 
 var db = require('./api/db.js');
-mongoose.connect(db.url);
+mongoose.connect(db.url, function(err) {
+    if(err) {
+        console.log('you have not bowed to the Mongod');
+    }
+});
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8000);
 app.set('apiBase', '/api/');
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/dist'));
-app.get('/api/cards', cardRoutes.collection);
+app.use(morgan());
+app.use(express.static(__dirname + '/app/dist/'));
 
+// routes =================================================
+require("./api/routes/cardRoutes")(app);
 
 var server = http.createServer(app);
 server.listen(app.get('port'), function() {
