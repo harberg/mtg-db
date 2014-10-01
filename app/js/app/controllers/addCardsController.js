@@ -4,9 +4,11 @@ module.exports = function(app) {
     app.controller("AddCardsController", function($scope, $http, $log) {
         $scope.card = {
             "cardName"  : "",
-            "cardPrice" : "",
+            "cardRare"  : "",
+            "cardColor" : "",
             "cardSet"   : "",
-            "cardColor" : ""
+            "cardQty"   : "",
+            "cardPrice" : ""
         };
 
         $scope.uploadMessage = false;
@@ -18,9 +20,11 @@ module.exports = function(app) {
                     $scope.uploadMessage  = true;
                     $scope.displayMessage = "You have saved " + $scope.card.cardName;
                     $scope.card.cardName  = "";
-                    $scope.card.cardPrice = "";
-                    $scope.card.cardSet   = "";
+                    $scope.card.cardRare  = "";
                     $scope.card.cardColor = "";
+                    $scope.card.cardSet   = "";
+                    $scope.card.cardQty   = "";
+                    $scope.card.cardPrice = "";
                     $scope.cardSubmitForm.$setPristine();
                 })
                 .error(function(data) {

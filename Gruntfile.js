@@ -75,7 +75,10 @@ module.exports = function(grunt) {
         watch : {
             scripts : {
                 files : ['app/js/**/*.js', 'app/bower_components/**/*.js', 'test/**/*.js', 'app/**/*.html', 'api/**/*.js', '!app/dist/**/*.html'],
-                tasks : ['build']
+                tasks : ['build'],
+                options: {
+                    livereload: true
+                }
             },
             express : {
                 files   : ['server.js', 'routes/*.js', 'models/*.js'],
@@ -84,6 +87,21 @@ module.exports = function(grunt) {
                     spawn : false
                 }
             }
+        },
+        mongoimport : {
+            options : {
+                db : 'ancient',
+                host : 'localhost',
+                collections : [
+                    {
+                        name : 'cards',
+                        type : 'csv',
+                        file : 'cardsDB.csv',
+                        fields : ['cardName', 'cardRare', 'cardColor', 'cardSet', 'cardQty', 'cardPrice'],
+                        drop : true,
+                    },
+                ],
+            },
         }
     });// end grunt.initConfig
 
@@ -92,6 +110,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', 'serve');
     grunt.registerTask('hint', 'jshint');
     grunt.registerTask('build', ['clean', 'browserify', 'copy:main', 'sass']);
+    grunt.registerTask('import', 'mongoimport');
 
 
 

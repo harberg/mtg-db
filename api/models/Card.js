@@ -4,10 +4,13 @@
 var mongoose = require('mongoose');
 
 var cardSchema = mongoose.Schema({
-    cardName : { type : String, trim : true },
+    cardName  : { type : String, trim : true },
+    cardRare  : { type : String, trim : true },
+    cardColor : { type : String, trim : true },
+    cardSet   : { type : String, trim : true },
+    cardQty   : Number,
     cardPrice : Number,
-    cardSet : { type : String, trim : true },
-    cardColor : String
+
 });
 
 module.exports = mongoose.model('Card', cardSchema);

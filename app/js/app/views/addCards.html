@@ -3,9 +3,11 @@
         <fieldset>
             <legend>Enter in a new Card</legend>
             <label>Card Name<input type="text" name="cardName" data-ng-model="card.cardName" placeholder="enter card name here..."></label>
-            <label>Card Price<input type="text" name="cardPrice" data-ng-model="card.cardPrice" placeholder="enter card price here..."></label>
-            <label>Card Set<input type="text" name="cardSet" data-ng-model="card.cardSet" placeholder="enter card set here..."></label>
+            <label>Card Rare<input type="text" name="cardRare" data-ng-model="card.cardRare" placeholder="enter card rarity here..."></label>
             <label>Card Color<input type="text" name="cardColor" data-ng-model="card.cardColor" placeholder="enter card color here..."></label>
+            <label>Card Set<input type="text" name="cardSet" data-ng-model="card.cardSet" placeholder="enter card set here..."></label>
+            <label>Card Quantity<input type="text" name="cardQty" data-ng-model="card.cardQty" placeholder="enter card quantity here..."></label>
+            <label>Card Price<input type="text" name="cardPrice" data-ng-model="card.cardPrice" placeholder="enter card price here..."></label>
         </fieldset>
         <button type="submit" data-ng-click="saveCard()">Save Card</button>
     </form>

@@ -30,10 +30,13 @@ module.exports = function(app) {
 
     app.post("/api/cards", function(req, res) {
         Card.create({
-            cardName : req.body.cardName,
-            cardPrice : req.body.cardPrice,
-            cardSet : req.body.cardSet,
-            cardColor : req.body.cardColor
+            cardName  : req.body.cardName,
+            cardRare  : req.body.cardRare,
+            cardColor : req.body.cardColor,
+            cardSet   : req.body.cardSet,
+            cardQty   : req.body.cardQty,
+            cardPrice : req.body.cardPrice
+
         }, function(err, card) {
             if(err) {
                 res.send(err);
@@ -46,4 +49,6 @@ module.exports = function(app) {
             });
         });
     });// end app.post("api/cards")
+
+
 };// end module.exports
