@@ -1,9 +1,9 @@
 'use strict';
 
 var Card = require('../models/Card');
+var multiparty = require('multiparty');
 
 module.exports = function(app) {
-
     app.get("/api/cards/:id", function(req, res) {
         console.log("top of the get request");
         res.setHeader("Content-Type", "application/json");
@@ -50,5 +50,36 @@ module.exports = function(app) {
         });
     });// end app.post("api/cards")
 
-
 };// end module.exports
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

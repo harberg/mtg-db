@@ -5,6 +5,9 @@ var http = require('http');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var MongoClient = require('mongodb').MongoClient;
+var format = require('util').format;
+var csv = require('csv-to-collection');
 
 var app = express();
 
@@ -15,6 +18,14 @@ mongoose.connect(db.url, function(err) {
         console.log('you have not bowed to the Mongod');
     }
 });
+
+// csv.readCsv("./cardsDB.csv", function(err, data) {
+//     if(err) throw err;
+//     var input = data;
+//     console.log(input);
+//     return input;
+// });
+
 
 app.set('port', 3000 || process.env.PORT );
 app.set('apiBase', '/api/');
@@ -28,5 +39,6 @@ require("./api/routes/cardRoutes.js")(app);
 
 var server = http.createServer(app);
 server.listen(app.get('port'), function() {
+    console.log(app);
     console.log('Server running on ' + app.get('port'));
 });

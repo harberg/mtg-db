@@ -28,13 +28,21 @@ module.exports = function(grunt) {
                         dest    : "app/dist",
                         flatten : false,
                         filter  : "isFile"
+                    },
+                    {
+                        expand : true,
+                        cwd : "wonder/",
+                        src : ["cardsDB.csv"],
+                        dest : "app/dist",
+                        flatten : false,
+                        filter : "isFile"
                     }
                 ]
             }
         },
         browserify : {
             all : {
-                src  : ['app/js/**/*.js', 'app/bower_components/angular/angular.js', 'app/bower_components/angular-base64/angular-base64.js', 'app/bower_components/angular-cookie/angular-cookie.js', 'app/bower_components/angular-loader/angular-loader.js', 'app/bower_components/angular-resource/angular-resource.js', 'app/bower_components/angular-route/angular-route.js'],
+                src  : ['app/js/**/*.js', 'app/bower_components/ng-file-upload-shim/angular-file-upload-shim.js', 'app/bower_components/angular/angular.js', 'app/bower_components/ng-file-upload/angular-file-upload.js', 'app/bower_components/angular-base64/angular-base64.js', 'app/bower_components/angular-cookie/angular-cookie.js', 'app/bower_components/angular-loader/angular-loader.js', 'app/bower_components/angular-resource/angular-resource.js', 'app/bower_components/angular-route/angular-route.js'],
                 dest : 'app/dist/client.js'
             },
             options : {
