@@ -28,14 +28,6 @@ module.exports = function(grunt) {
                         dest    : "app/dist",
                         flatten : false,
                         filter  : "isFile"
-                    },
-                    {
-                        expand : true,
-                        cwd : "wonder/",
-                        src : ["cardsDB.csv"],
-                        dest : "app/dist",
-                        flatten : false,
-                        filter : "isFile"
                     }
                 ]
             }

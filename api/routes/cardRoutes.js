@@ -1,7 +1,6 @@
 'use strict';
 
 var Card = require('../models/Card');
-var multiparty = require('multiparty');
 
 module.exports = function(app) {
     app.get("/api/cards/:id", function(req, res) {

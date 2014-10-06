@@ -3,6 +3,7 @@
         <h4>Seach for Cards</h4>
     </header><!-- /header -->
     <input data-ng-model="query" class="" placeholder="search..."><br>
+    <button data-ng-click="cards.load()">Load it up</button>
     <main>
         <table>
             <caption>Available Cards</caption>
@@ -17,7 +18,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="card in cards | filter:query | orderBy:predicate:reverse">
+                <tr data-ng-repeat="card in cards |
+                        filter:query |
+                        orderBy:predicate:reverse">
                     <td>{{ card.cardName }}</td>
                     <td>{{ card.cardRare }}</td>
                     <td>{{ card.cardColor }}</td>
@@ -26,6 +29,26 @@
                     <td>{{ card.cardPrice | currency }}</td>
                 </tr>
             </tbody>
+            <tfoot>
+                <td colspan="6">
+                    <div class="pagination">
+                        <ul>
+                            <li ng-class="prevPageDisabled()">
+                                <a data-ng-click="prevPage()"><-- Prev</a>
+                            </li>
+                            <li data-ng-repeat="n in rnage()"
+                                data-ng-class="{active: n == currentPage}"
+                                data-ng-click="setPage(n)">
+                                <a href="#">{{n+1}}</a>
+                            </li>
+                            <li data-ng-class="nextPageDisabled()">
+                                <a href data-ng-click="nextPage()">Next --></a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tfoot>
         </table>
+
     </main>
 </section>
