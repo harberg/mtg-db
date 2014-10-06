@@ -5,6 +5,7 @@ node_modules
 app/bower_components
 dist/
 api/db.js
+npm-debug.log
 
 # Users Environment Variables
 .lock-wscript
