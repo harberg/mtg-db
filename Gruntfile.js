@@ -41,14 +41,6 @@ module.exports = function(grunt) {
                 transform : ['debowerify'],
                 debug     : true
             },
-            // angulartest : {
-            //     options : {
-            //         transform : ['debowerify'],
-            //         debug : true
-            //     },
-            //     src : ['test/angular/**/*test.js'],
-            //     dest : 'test/angular-tests.js'
-            // }
         },
         simplemocha : {
             all : {
@@ -100,13 +92,6 @@ module.exports = function(grunt) {
                     spawn : false
                 }
             },
-            angulartest : {
-                files : ['app/js/app/**/*.js', 'app/js/index.html', 'app/js/app/views/**/*.html', 'server.js'],
-                tasks : ['buildtest', 'express:dev'],
-                options : {
-                    spawn : false
-                }
-            },
             mochatest : {
                 files : ['test/mocha/**/*.js'],
                 tasks : ['test'],
@@ -138,8 +123,6 @@ module.exports = function(grunt) {
     grunt.registerTask('hint', 'jshint');
     grunt.registerTask('build', ['clean', 'browserify', 'copy:main', 'sass']);
     grunt.registerTask('import', 'mongoimport');
-    grunt.registerTask('angulartest', ['browserify:angulartest']);
-    grunt.registerTask('angularwatch', ['angulartest', 'watch:angulartest']);
     grunt.registerTask('test', ['simplemocha']);
 
 
