@@ -50,7 +50,25 @@ module.exports = function(app) {
 };// end module.exports
 
 
+// var working = true;
+// var queue = [];
 
+// async.whilst(function () {
+//     return !(queue.length === 0 && working === false);
+// }, function (cb) {
+//     if (queue.length) {
+//         queue.pop() //POST TO MONGOOSE THEN cb()
+//     } else {
+//         // data is coming in slow if you get here
+//         // and you need to wait somehow
+//     }
+// }, function (err) {
+//     if (err) { handle }
+//     res.send({ success })
+// });
+
+// on(data) { queue.push(data) }
+// on(end) { working = false; }
 
 
 

@@ -5,9 +5,21 @@ var http = require('http');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var Converter = require('csvtojson').core.Converter;
+var fs = require('fs');
 var MongoClient = require('mongodb').MongoClient;
-var format = require('util').format;
-var csv = require('csv-to-collection');
+var assert = require('assert');
+
+var csvFileName = "./cardsDB.csv";
+var jsonFileName = "./cardsDB.json";
+
+var readStream = fs.createReadStream(csvFileName);
+var writeStream = fs.createWriteStream(jsonFileName);
+
+var param = {constructResult : false};
+var csvConverter = new Converter(param);
+
+readStream.pipe(csvConverter).pipe(writeStream);
 
 var app = express();
 
@@ -19,12 +31,24 @@ mongoose.connect(db.url, function(err) {
     }
 });
 
-// csv.readCsv("./cardsDB.csv", function(err, data) {
-//     if(err) throw err;
-//     var input = data;
-//     console.log(input);
-//     return input;
-// });
+var insertDocs = function(database, callback) {
+    var collection = database.collection('cards');
+    collection.insert({a:2}, function(err, result) {
+        assert.equal(err, null);
+        console.log("inserted a document");
+        callback(result);
+    });
+}
+
+MongoClient.connect(db.url, function(err, dbcon) {
+    assert.equal(null, err);
+    //console.log(db.collection);
+    insertDocs(dbcon, function() {
+        dbcon.close();
+    });
+});
+
+
 
 
 app.set('port', 3000 || process.env.PORT );
