@@ -5,18 +5,20 @@ chai.use(chaihttp);
 var expect = chai.expect;
 
 describe('cardRoutes', function() {
-    var id = "Utter End";
+    var newCard = {
+        cardName: "alpine grizzly" + Math.floor(Math.random()*1000)
+    };
 
     it('creates a new card', function(done) {
         chai.request('http://localhost:3000')
             .post('/api/cards')
             .req(function(req) {
-                req.send({"cardName" : "alpine grizzly"});
+                req.send(newCard);
             })
             .res(function(res) {
                 expect(res).to.have.status(200);
                 expect(res.body[0]).to.have.property('_id');
-                expect(res.body[0].cardName).to.eql('Utter End');// the db is populated and the first entry is "Utter End"
+                expect(res.body[0].cardName).to.eql(newCard.cardName);
                 done();
             })
     });
@@ -34,10 +36,10 @@ describe('cardRoutes', function() {
 
     it('gets one card', function(done) {
         chai.request('http://localhost:3000')
-            .get('/api/cards/' + id)
+            .get('/api/cards/' + newCard.cardName)
             .res(function(res) {
                 expect(res).to.have.status(200);
-                expect(res.body[0].cardName).to.eql('Utter End');
+                expect(res.body[0].cardName).to.eql(newCard.cardName);
                 done();
             });
     });

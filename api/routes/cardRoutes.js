@@ -21,8 +21,9 @@ module.exports = function(app) {
         Card.find({}, function(err, data) {
             if(err) {
                 res.send(err);
-                //return false;
+                return false;
             }
+
             res.send(data);
         });
     });
@@ -36,16 +37,13 @@ module.exports = function(app) {
             cardQty   : req.body.cardQty,
             cardPrice : req.body.cardPrice
 
+        // Send newly created card back
         }, function(err, card) {
             if(err) {
                 res.send(err);
             }
-            Card.find(function(err, cards) {
-                if(err) {
-                    res.send(err);
-                }
-                res.json(cards);
-            });
+
+            res.json([card]);
         });
     });// end app.post("api/cards")
 
