@@ -10,6 +10,8 @@ The intent is to have a quick way to search for cards that are instock without h
   * Bitters
 3. Grunt
 4. Bower
+5. csvconverter
+5. MongoDB native drivers
 
 #### Needed
 1. You will need to create a db.js file in the api folder.
@@ -22,3 +24,8 @@ module.exports = {
 #### Current Issues
 1. Adding a file upload for the csv that then updates the DB.
 From the mongo shell this is a breeze, just use mongoimport. A small example of the formated csv is in the root directory called cardsDB.csv. This matches the monoogse schema. There is an add a card page that can upload on document at a time to the collection.
+
+2. Need to figure out how to take the cardsDB.json file and insert it into the DB.
+
+#### Current Status
+1. csvConverter is being used to convert the cardsDB.csv into cardsDB.json using readStream and writeStream. This work is currently all being done in the server.js file. The connection to the DB is being done with the MongoDB native drivers.
