@@ -11,6 +11,14 @@ The intent is to have a quick way to search for cards that are instock without h
 3. Grunt
 4. Bower
 
+#### Needed
+1. You will need to create a db.js file in the api folder.
+```
+module.exports = {
+    url: "mongodb://localhost/ancient"
+};
+```
+
 #### Current Issues
 1. Adding a file upload for the csv that then updates the DB.
 From the mongo shell this is a breeze, just use mongoimport. A small example of the formated csv is in the root directory called cardsDB.csv. This matches the monoogse schema. There is an add a card page that can upload on document at a time to the collection.
