@@ -12,6 +12,7 @@ var assert = require('assert');
 
 var csvFileName = "./cardsDB.csv";
 var jsonFileName = "./cardsDB.json";
+var jsonData = require("./cardsDB");
 
 var readStream = fs.createReadStream(csvFileName);
 var writeStream = fs.createWriteStream(jsonFileName);
@@ -33,7 +34,8 @@ mongoose.connect(db.url, function(err) {
 
 var insertDocs = function(database, callback) {
     var collection = database.collection('cards');
-    collection.insert({a:2}, function(err, result) {
+
+    collection.insert(jsonData, function(err, result) {
         assert.equal(err, null);
         console.log("inserted a document");
         callback(result);
@@ -42,12 +44,15 @@ var insertDocs = function(database, callback) {
 
 MongoClient.connect(db.url, function(err, dbcon) {
     assert.equal(null, err);
+    dbcon.dropCollection('cards', function(err, results) {
+        assert.equal(null, err);
+        console.log(results);
+    });
     //console.log(db.collection);
     insertDocs(dbcon, function() {
         dbcon.close();
     });
 });
-
 
 
 
