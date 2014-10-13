@@ -22,6 +22,8 @@
     "angular-loader": "~1.2.25",
     "angular-base64": "~2.0.2",
     "angular-resource": "~1.2.25",
-    "angular-cookie": "~4.0.2"
+    "angular-cookie": "~4.0.2",
+    "angular-file-upload": "~1.1.1",
+    "ng-flow": "~2"
   }
 }
