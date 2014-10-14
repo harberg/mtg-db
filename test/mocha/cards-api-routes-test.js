@@ -43,4 +43,15 @@ describe('cardRoutes', function() {
                 done();
             });
     });
+
+    it('deletes a card', function(done) {
+        chai.request('http://localhost:3000')
+            .del('/api/cards/' + newCard.cardName)
+            .res(function(res) {
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.eql('deleted');
+                done();
+            });
+    });
+
 });

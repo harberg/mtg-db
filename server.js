@@ -57,8 +57,8 @@ MongoClient.connect(db.url, function(err, dbcon) {
 app.set('port', 3000 || process.env.PORT );
 app.set('apiBase', '/api/');
 
-app.use(bodyParser());
-app.use(morgan());
+app.use(bodyParser.json());
+app.use(morgan('combined'));
 app.use(express.static(__dirname + '/app/dist/'));
 
 // routes =================================================

@@ -4,6 +4,9 @@
     </header><!-- /header -->
     <input data-ng-model="query" class="" placeholder="search..."><br>
     <button data-ng-click="cards.load()">Load it up</button>
+    <div class="uploadMessage" data-ng-show="deleteMessage">
+        {{message}}
+    </div>
     <main>
         <table>
             <caption>Available Cards</caption>
@@ -15,6 +18,8 @@
                     <th>Set</th>
                     <th><a href="" data-ng-click="predicate='cardQty'; reverse=!reverse">QTY</a></th>
                     <th>Price</th>
+                    <th>Remove</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,10 +32,12 @@
                     <td>{{ card.cardSet }}</td>
                     <td>{{ card.cardQty }}</td>
                     <td>{{ card.cardPrice | currency }}</td>
+                    <td data-ng-click="deleteCard(card)"> X </td>
+                    <td data-ng-click="editCard(card)">Edit</td>
                 </tr>
             </tbody>
             <tfoot>
-                <td colspan="6">
+                <td colspan="8">
                     <div class="pagination">
                         <ul>
                             <li ng-class="prevPageDisabled()">

@@ -3,11 +3,12 @@
 
 module.exports = function(app) {
 
-    app.controller("SearchCardsController", function($scope, $http) {
+    app.controller("SearchCardsController", function($scope, $http, $location) {
         $scope.currentPage = 0;
         $scope.cardsPerPage = 5;
         var cards = {};
 
+        $scope.getAllCards = function() {
             $http({
                 method : "GET",
                 url : "/api/cards"
@@ -20,49 +21,32 @@ module.exports = function(app) {
             .error(function(dbcards, status, headers, config) {
                 console.log("There was and error: " + dbcards);
             });
-            //return cards;
+        }
 
-        // $http({
-        //     method : "GET",
-        //     url : "/api/cards"
-        // })
-        // .success(function(data, status, headers, config) {
-        //     cards = data;
-        //     console.log(cards);
-        //     return cards;
+        $scope.getAllCards();
 
-        // })
-        // .error(function(data, status, headers, config) {
-        //     console.log(data);
-        // });
         $scope.predicate = "cardName";
+        $scope.deleteMessage = false;
         console.log(cards);
-        // $scope.prevPage = function() {
-        //     if($scope.currentPage > 0) {
-        //         $scope.currentPage--;
-        //     }
-        // };
-        // $scope.prevPageDisabled = function() {
-        //     return $scope.currentPage === 0 ? "disabled" : "";
-        // };
-        // $scope.pageCount = function() {
-        //     return Math.ceil($scope.cards.length/$scope.cardsPerPage)-1;
-        // }
-        // $scope.nextPage = function() {
-        //     if($scope.currentPage < $scope.pageCount()) {
-        //         $scope.currentPage++;
-        //     }
-        // };
-        // $scope.nextPageDisabled = function() {
-        //     return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
-        // };
+
+        $scope.deleteCard = function(card) {
+            $http.delete("api/cards/" + card._id, card)
+                .success(function() {
+                    console.log(card._id);
+                    $scope.getAllCards();
+                    $scope.deleteMessage  = true;
+                    $scope.message = "You have deleted " + card.cardName;
+                })
+                .error(function(data) {
+                    console.log(data);
+                });
+        }
+
+        $scope.editCard = function(card) {
+            console.log(card._id);
+            $location.path(card._id);
+        }
 
     });// end app.controller
 
-    // app.filter('offset', function() {
-    //     return function(input, start) {
-    //         start = parseInt(start, 10);
-    //         return input.slice(start);
-    //     };
-    // });// end app.filter
 };// end module.exports
