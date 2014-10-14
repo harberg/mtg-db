@@ -50,5 +50,9 @@ module.exports = function(app) {
                     $log.warn(data)
                 });
         };// end saveCard
+
+        $scope.returnHome = function() {
+            $location.path('/');
+        }
     });// end app.controller
 };
