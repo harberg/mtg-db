@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function(app) {
-    app.controller("EditCardsController", function($scope, $http, $log, $location, $routeParams) {
+    app.controller("EditCardsController", function($scope, $http, $log, $location, $routeParams, CartService) {
 
         $scope.getOneCard = function(card) {
             var id = $routeParams.id;
@@ -54,5 +54,7 @@ module.exports = function(app) {
         $scope.returnHome = function() {
             $location.path('/');
         }
+
+        console.log(CartService);
     });// end app.controller
 };

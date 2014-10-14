@@ -7,6 +7,15 @@
     <div class="uploadMessage" data-ng-show="deleteMessage">
         {{message}}
     </div>
+    <div class="showCart" data-ng-show="currentCart">
+        Current Cart
+        <ul>
+            <li data-ng-repeat="cartDisplay in cartDisplays">
+                {{ cartDisplay.cardName }} {{ cartDisplay.cardPrice | currency }}
+            </li>
+        </ul>
+
+    </div>
     <main>
         <table>
             <caption>Available Cards</caption>
@@ -20,6 +29,7 @@
                     <th>Price</th>
                     <th>Remove</th>
                     <th>Edit</th>
+                    <th>Add</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,10 +44,11 @@
                     <td>{{ card.cardPrice | currency }}</td>
                     <td data-ng-click="deleteCard(card)"> X </td>
                     <td data-ng-click="editCard(card)">Edit</td>
+                    <td data-ng-click="addCard(card)">Add</td>
                 </tr>
             </tbody>
             <tfoot>
-                <td colspan="8">
+                <td colspan="9">
                     <div class="pagination">
                         <ul>
                             <li ng-class="prevPageDisabled()">
